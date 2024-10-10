@@ -8,6 +8,7 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController charController;
     private Vector3 playerVelocity;
     public float speed = 6f;
+    public float gravity = -9.8f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +29,9 @@ public class PlayerMotor : MonoBehaviour
         moveDir.x = input.x;
         moveDir.z = input.y;
         charController.Move(transform.TransformDirection(moveDir) * speed * Time.deltaTime);
+        playerVelocity.y += gravity * Time.deltaTime;
+        charController.Move(playerVelocity * Time.deltaTime);
+
+        Debug.Log(playerVelocity.y);
     }
 }
